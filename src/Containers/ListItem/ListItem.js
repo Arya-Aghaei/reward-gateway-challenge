@@ -6,10 +6,10 @@ import {
   LabelInput,
 } from "./Styles";
 import user from "./user.svg";
-import { BiDotsVerticalRounded, BiEdit } from "react-icons/bi";
+import { BiDotsVerticalRounded, BiEdit, BiLabel } from "react-icons/bi";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { AiOutlineCloseCircle, AiOutlineCheckCircle } from "react-icons/ai";
-import { MdWork } from "react-icons/md";
+import { MdLabelOutline, MdWork } from "react-icons/md";
 import { createRef, useEffect, useState } from "react";
 import Lightbox from "react-awesome-lightbox";
 import "react-awesome-lightbox/build/style.css";
@@ -146,23 +146,39 @@ const ListItem = ({
         <div className="actions">
           {editingItem !== uuid && (
             <button className="btn" onClick={() => setEditingItem(uuid)}>
-              <span>{label ?? "Edit"}</span>
+              <span className={label && "has-label"}>
+                {label && (
+                  <>
+                    <BiLabel fontSize={15} />
+                    &nbsp;
+                  </>
+                )}
+                {label ?? "Edit Label"}
+              </span>
               <BiEdit className="icon" />
             </button>
           )}
           {editingItem === uuid && (
             <>
-              <span
-                className="btn clicked"
-                //   onClick={() => setEditingItem(false)}
-              >
+              <span className="btn clicked">
                 <AiOutlineCloseCircle
                   color="red"
                   fontSize={20}
                   onClick={() => setEditingItem(false)}
                   style={{ zIndex: 10 }}
                 />
-                <LabelInput name="label" ref={inputRef} />
+                <LabelInput
+                  name="label"
+                  ref={inputRef}
+                  placeholder="Enter item label"
+                  autoFocus
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter") {
+                      onChangeLabel(inputRef?.current?.value);
+                      setEditingItem(false);
+                    }
+                  }}
+                />
                 <AiOutlineCheckCircle
                   color="green"
                   fontSize={20}

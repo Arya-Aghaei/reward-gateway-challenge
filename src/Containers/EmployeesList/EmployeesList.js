@@ -1,10 +1,5 @@
-import { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
-import { employeesListSuccess } from "../../Actions/employees.action";
-import ListItem from "../../Components/ListItem";
-import { useEmployees } from "../../Hooks";
-import EmployeesProvider from "../../Hooks/employees.hook";
-import { employeesServices } from "../../Services/employees.service";
+import { useState } from "react";
+import ListItem from "../../Containers/ListItem";
 
 const EmployeesList = ({ data }) => {
   const [colorPickerId, setColorPickerId] = useState(false);

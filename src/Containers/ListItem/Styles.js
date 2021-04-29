@@ -1,3 +1,4 @@
+import Color from "color";
 import { BlockPicker } from "react-color";
 import styled from "styled-components";
 
@@ -25,9 +26,8 @@ export const ListItemContainer = styled.li`
     background-image: linear-gradient(
       to top,
       ${(props) => props?.bgColor} 0%,
-      #04befe 100%
+      ${(props) => Color(props?.bgColor).alpha(1).lighten(0.11)} 100%
     );
-    // background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
     border-radius: 4px 4px 100% 100%;
     transition: all 0.4s ease-out;
     top: 0;
@@ -44,7 +44,6 @@ export const ListItemContainer = styled.li`
     .pic {
       box-shadow: 0px 0px 0px 8px rgb(255 255 255 / 30%);
       img {
-        -webkit-filter: grayscale(0%);
         filter: grayscale(0%);
       }
     }
@@ -96,7 +95,6 @@ export const ListItemContainer = styled.li`
 
       img {
         width: 100%;
-        -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
         background: #fff;
       }
@@ -140,7 +138,7 @@ export const ListItemContainer = styled.li`
       border: 0;
       background-color: transparent;
       box-sizing: border-box;
-      width: calc(100% - 1px);
+      width: 100%;
       height: 36px;
       margin: 0;
       text-transform: uppercase;
@@ -156,6 +154,14 @@ export const ListItemContainer = styled.li`
       font-family: "Barlow", sans-serif;
       letter-spacing: 0.5px;
       background: rgba(68, 129, 235, 0.08);
+
+      span {
+        &.has-label {
+          font-size: 13px;
+          font-weight: 600;
+          display: flex;
+        }
+      }
 
       &::before {
         content: "";
@@ -280,9 +286,16 @@ export const ListItemColorPicker = styled(BlockPicker)`
 
 export const LabelInput = styled.input`
   z-index: 2;
-  border-radius: 10px;
-  border: none;
+  border-radius: 21px;
+  padding: 5px 14px;
+  border: 1px solid #d1cdcd;
+
+  &::placeholder {
+    color: rgb(0 0 0 / 40%);
+  }
+
   &:focus {
     outline: none;
+    border: 1px solid #4481eb;
   }
 `;
